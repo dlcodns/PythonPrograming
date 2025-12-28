@@ -136,21 +136,125 @@ Class
 
 
 #static method와 clas method
+# class Student:
+#     @classmethod
+#     def cmethod(cls):
+#         print("Class Method")
+#         print(cls)
+
+#     @staticmethod
+#     def smethod():
+#         print("정적 Method")
+
+# #클래스를 이용한 Method
+# Student.cmethod()
+# Student.smethod()
+
+# #인스턴스를 이용한 Method
+# student = Student
+# student.cmethod()
+# student.smethod()
+
+
+#__slot__: 이 attribute에 list로 attribute을 나열하면 나열한 attribute만 사용이 가능하고 새로운 attribute은 생성 불가능
+#이걸 정의하면 __dict__ 사용 불가능
+# class Student:
+#     __slots__ = ["name", "score"]
+
+# student = Student()
+# student.name = "제시카"
+# student.score = 90
+# student.tel = "01031391997"
+# print(student.tel)
+
+#오류 메시지: AttributeError: 'Student' object has no attribute 'tel' and no __dict__ for setting new attributes
+
+
+#private: 속성을 생성할 때 __추가하면 private 속성이 됨
+#property: getter 와 setter Method를 호출하는 것으로 처리되는 Attribute
+#변수명 = property(fget=None, fset=None, fdel=None, doc=None)
+# class Student:
+#     def __init__(self,name, age):
+#         self.name = name
+#         self.__age = age
+
+# maria = Student("마리아", 20)
+# maria.name = "Maria"
+# maria.__age -= 1
+#오류 메시지: private을 수정하려고 해서. AttributeError: 'Student' object has no attribute '__age'
+
+
+
+# class Student:
+#     def __init__(self,name="noname", age=20):
+#         self.name = name
+#         self.__age = age
+
+#     def setAge(self, age):
+#         print("Setter 호출")
+#         self.__age = age
+
+#     def getAge(self):
+#         print("getter 호출")
+#         return self.__age
+    
+#     age = property(getAge, setAge)
+
+# stu = Student()
+# stu.age = 30
+# print(stu.age)
+
+
+
+#데코레이터를 이용한 property
 class Student:
-    @classmethod
-    def cmethod(cls):
-        print("Class Method")
-        print(cls)
+    def __init__(self,name="noname", age=20):
+        self.name = name
+        self.__age = age
 
-    @staticmethod
-    def smethod():
-        print("정적 Method")
+    @age.setter
+    def age(self, age):
+        print("Setter 호출")
+        self.__age = age
 
-#클래스를 이용한 Method
-Student.cmethod()
-Student.smethod()
+    @property
+    def age(self):
+        print("getter 호출")
+        return self.__age
 
-#인스턴스를 이용한 Method
-student = Student
-student.cmethod()
-student.smethod()
+stu = Student()
+stu.age = 30
+print(stu.age)
+
+
+
+
+
+
+
+
+
+
+
+#================다중 상속==========
+class Base1:
+    def __init__(self):
+        print("첫번째 상위 클래스의 초기화 method")
+
+    def method(self):
+        print("첫번째 상위 클래스의 method")
+
+class Base2:
+    def __init__(self):
+        print("두번째 상위 클래스의 초기화 method")
+
+    def method(self):
+        print("두번째 상위 클래스의 method")
+
+class Derived(Base1, Base2):
+    def __init__(self):
+        #첫번째 상위 클래스의 초기화 method
+        super().__init__()
+        #두번째 상위 클래스의 초기화 method
+        super(Base1, self).method()
+        print("하위 클래스의 method")
