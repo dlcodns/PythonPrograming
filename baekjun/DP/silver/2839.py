@@ -17,6 +17,8 @@ INF = 10**9
 dp = [INF]*(n+1)
 dp[0] = 0
 
+#ikg의 포대 개수는 (i-3)과 (i-5)일 때보다 1포대 많음
+# => [dp[i-3]+1], [dp[i-5]+1]
 for i in range(1, n+1):
     if i>=3:
         dp[i] = min(dp[i],dp[i-3]+1)
