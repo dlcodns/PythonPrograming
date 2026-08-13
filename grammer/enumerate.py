@@ -31,3 +31,9 @@ print(scores)
 words = ["python", "java", "go"]
 word_dict = {i:w for i, w in enumerate(words)}
 print(word_dict)
+
+# 두 리스트를 zip이랑 같이 써서 인덱스+두 값 동시에 순회
+names = ["철수", "영희", "민수"]
+ages = [20,22,21]
+for i, (name, age) in enumerate(zip(names,ages)):
+    print(f'{i}: {name}({age}세)')
