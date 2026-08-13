@@ -37,3 +37,10 @@ names = ["철수", "영희", "민수"]
 ages = [20,22,21]
 for i, (name, age) in enumerate(zip(names,ages)):
     print(f'{i}: {name}({age}세)')
+    
+# 파일 읽을 때 라인 번호 붙이기
+text = """첫째 줄
+둘째 줄
+셋째 줄"""
+for line_num, line in enumerate(text.split('\n'), start=1):
+    print(f'{line_num}행: {line}')
