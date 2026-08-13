@@ -20,3 +20,9 @@ for i, num in enumerate(numbers):
     if num%2==0:
         print(f'{i}: {num}')
     
+# 리스트 값을 인덱스 기준으로 수정하기
+scores = [80,90,75,60]
+for i, score in enumerate(scores):
+    if score<70:
+        scores[i] = 0
+print(scores)
