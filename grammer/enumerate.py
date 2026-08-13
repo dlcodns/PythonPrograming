@@ -26,3 +26,8 @@ for i, score in enumerate(scores):
     if score<70:
         scores[i] = 0
 print(scores)
+
+# 딕셔너리로 변환하기 (인덱스를 key로)
+words = ["python", "java", "go"]
+word_dict = {i:w for i, w in enumerate(words)}
+print(word_dict)
